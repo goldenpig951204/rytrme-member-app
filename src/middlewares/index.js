@@ -820,7 +820,12 @@ const rytrmeMiddleware = (prefix) => createProxyMiddleware({
                 let $ = cheerio.load(response);
                 if (req.proxy.cookie) {
                     let {token, user} = JSON.parse(req.proxy.cookie);
-                    console.log($.html());
+                    $("head").append(`<style>
+                        .style_left__nUNqr > a:nth-child(3) {
+                            display: none;
+                        }
+                    </style>`);
+
                     $("head").append(`<script>
                         var token = localStorage.getItem("token");
                         if (!token) {
